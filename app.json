@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "DocuMap",
+    "slug": "documap",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#090D16"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.documap.vault",
+      "infoPlist": {
+        "NSCameraUsageDescription": "DocuMap uses your camera for 100% offline document scanning and on-device OCR.",
+        "NSFaceIDUsageDescription": "DocuMap uses Face ID to lock and encrypt your personal document vault locally."
+      }
+    },
+    "android": {
+      "package": "com.documap.vault",
+      "permissions": [
+        "CAMERA",
+        "USE_BIOMETRIC",
+        "USE_FINGERPRINT"
+      ]
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

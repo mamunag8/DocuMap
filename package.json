@@ -1,0 +1,38 @@
+{
+  "name": "documap",
+  "version": "1.0.0",
+  "description": "DocuMap — Your Personal Document Vault & Knowledge Map (100% Local-First, BYOC Sync)",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "expo": "~52.0.0",
+    "expo-status-bar": "~2.0.0",
+    "expo-file-system": "~18.0.0",
+    "expo-sqlite": "~15.0.0",
+    "expo-crypto": "~14.0.0",
+    "expo-clipboard": "~7.0.0",
+    "expo-haptics": "~14.0.0",
+    "expo-local-authentication": "~15.0.0",
+    "expo-document-picker": "~13.0.0",
+    "expo-image-picker": "~16.0.0",
+    "expo-sharing": "~13.0.0",
+    "expo-print": "~14.0.0",
+    "react": "18.3.1",
+    "react-native": "0.76.6",
+    "react-native-svg": "15.8.0",
+    "react-native-safe-area-context": "4.12.0",
+    "@expo/vector-icons": "^14.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@types/react": "~18.3.12",
+    "typescript": "~5.3.3"
+  },
+  "private": true
+}
