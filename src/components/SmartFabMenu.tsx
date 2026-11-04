@@ -50,15 +50,7 @@ export const SmartFabMenu: React.FC = () => {
     }
     setComposerType(type);
 
-    if (type === 'SCAN') {
-      setTitle('Field Sensor Calibration Receipt');
-      setScanMode('SINGLE');
-      setFolderId('folder-receipts-scans');
-      setTagsInput('project-alpha, receipt, hardware');
-      setContentMd(
-        `# [ON-DEVICE OCR EXTRACTED] Field Sensor Calibration Receipt\n**Vendor:** Precision Photonics Lab\n**Total:** $310.00 USD\n**Connected Project Note:** [[Project Budget & Architecture Notes]]\n**Logged In:** [[Equipment Expense Log]]\n\n#project-alpha #receipt #hardware`
-      );
-    } else if (type === 'NOTE') {
+    if (type === 'NOTE') {
       setTitle('Edge NPU Benchmark & Sync Notes');
       setFolderId('folder-knowledge-notes');
       setTagsInput('project-alpha, benchmark');
