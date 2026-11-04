@@ -8,7 +8,10 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:playstore:aab": "eas build --platform android --profile production",
+    "build:android:apk": "eas build --platform android --profile preview",
+    "submit:playstore": "eas submit --platform android --profile production"
   },
   "dependencies": {
     "expo": "~52.0.0",

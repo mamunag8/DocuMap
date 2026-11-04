@@ -15,6 +15,7 @@ import { NodeType, ScanMode, VaultNode } from '../models/types';
 import { WikiLinkAutocompleteSheet } from './WikiLinkAutocompleteSheet';
 import { MarkdownWorkspaceModal } from './MarkdownWorkspaceModal';
 import { DataLogStudioModal } from './DataLogStudioModal';
+import { ScannerAndPdfStudioModal } from './ScannerAndPdfStudioModal';
 
 export const SmartFabMenu: React.FC = () => {
   const { theme } = useAppTheme();
@@ -39,9 +40,14 @@ export const SmartFabMenu: React.FC = () => {
   const [activeDataLogNode, setActiveDataLogNode] = useState<VaultNode | null>(
     null
   );
+  const [scannerStudioOpen, setScannerStudioOpen] = useState<boolean>(false);
 
   const openComposer = (type: NodeType) => {
     setMenuOpen(false);
+    if (type === 'SCAN') {
+      setScannerStudioOpen(true);
+      return;
+    }
     setComposerType(type);
 
     if (type === 'SCAN') {
@@ -565,6 +571,16 @@ export const SmartFabMenu: React.FC = () => {
             setActiveDataLogNode(null);
             setActiveMarkdownNode(target);
           }
+        }}
+      />
+
+      {/* Full CamScanner-Grade Offline Scanner & PDF Studio Modal */}
+      <ScannerAndPdfStudioModal
+        visible={scannerStudioOpen}
+        onClose={() => setScannerStudioOpen(false)}
+        onScanSaved={(savedNode) => {
+          setScannerStudioOpen(false);
+          setInspectingNode(savedNode);
         }}
       />
 

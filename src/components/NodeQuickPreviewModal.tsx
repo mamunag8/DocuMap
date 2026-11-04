@@ -15,6 +15,7 @@ import { VaultNode } from '../models/types';
 import { BacklinksAndMiniGraphTray } from './BacklinksAndMiniGraphTray';
 import { MarkdownWorkspaceModal } from './MarkdownWorkspaceModal';
 import { DataLogStudioModal } from './DataLogStudioModal';
+import { ScannerAndPdfStudioModal } from './ScannerAndPdfStudioModal';
 
 export const NodeQuickPreviewModal: React.FC = () => {
   const { theme } = useAppTheme();
@@ -36,6 +37,9 @@ export const NodeQuickPreviewModal: React.FC = () => {
   const [editingDataLogNode, setEditingDataLogNode] = useState<VaultNode | null>(
     null
   );
+  const [editingScannerNode, setEditingScannerNode] = useState<VaultNode | null>(
+    null
+  );
 
   const handleSwitchWorkspaceNode = (target: VaultNode) => {
     if (target.type === 'LOG') {
@@ -47,7 +51,12 @@ export const NodeQuickPreviewModal: React.FC = () => {
     }
   };
 
-  if (!inspectingNode && !editingMarkdownNode && !editingDataLogNode) {
+  if (
+    !inspectingNode &&
+    !editingMarkdownNode &&
+    !editingDataLogNode &&
+    !editingScannerNode
+  ) {
     return null;
   }
 
@@ -171,44 +180,77 @@ export const NodeQuickPreviewModal: React.FC = () => {
                   </View>
                 </View>
 
-                <TouchableOpacity
-                  onPress={() => {
-                    const target = inspectingNode;
-                    setInspectingNode(null);
-                    if (target.type === 'LOG') {
-                      setEditingDataLogNode(target);
-                    } else {
-                      setEditingMarkdownNode(target);
-                    }
-                  }}
-                  style={[
-                    styles.studioLaunchBtn,
-                    {
-                      backgroundColor: pillar.softBg,
-                      borderColor: pillar.borderColor,
-                    },
-                  ]}
-                >
-                  <Ionicons
-                    name={
-                      inspectingNode.type === 'LOG'
-                        ? 'grid-outline'
-                        : 'create-outline'
-                    }
-                    size={15}
-                    color={pillar.color}
-                  />
-                  <Text
+                <View style={{ flexDirection: 'row', gap: 6 }}>
+                  {inspectingNode.type === 'SCAN' && (
+                    <TouchableOpacity
+                      onPress={() => {
+                        const target = inspectingNode;
+                        setInspectingNode(null);
+                        setEditingScannerNode(target);
+                      }}
+                      style={[
+                        styles.studioLaunchBtn,
+                        {
+                          backgroundColor: theme.nodeScanSoft,
+                          borderColor: theme.nodeScanBorder,
+                        },
+                      ]}
+                    >
+                      <Ionicons
+                        name="scan-outline"
+                        size={15}
+                        color={theme.nodeScan}
+                      />
+                      <Text
+                        style={[
+                          styles.studioLaunchText,
+                          { color: theme.nodeScan },
+                        ]}
+                      >
+                        PDF Studio
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+
+                  <TouchableOpacity
+                    onPress={() => {
+                      const target = inspectingNode;
+                      setInspectingNode(null);
+                      if (target.type === 'LOG') {
+                        setEditingDataLogNode(target);
+                      } else {
+                        setEditingMarkdownNode(target);
+                      }
+                    }}
                     style={[
-                      styles.studioLaunchText,
-                      { color: pillar.color },
+                      styles.studioLaunchBtn,
+                      {
+                        backgroundColor: pillar.softBg,
+                        borderColor: pillar.borderColor,
+                      },
                     ]}
                   >
-                    {inspectingNode.type === 'LOG'
-                      ? 'Table Studio'
-                      : 'Edit & [[Link]]'}
-                  </Text>
-                </TouchableOpacity>
+                    <Ionicons
+                      name={
+                        inspectingNode.type === 'LOG'
+                          ? 'grid-outline'
+                          : 'create-outline'
+                      }
+                      size={15}
+                      color={pillar.color}
+                    />
+                    <Text
+                      style={[
+                        styles.studioLaunchText,
+                        { color: pillar.color },
+                      ]}
+                    >
+                      {inspectingNode.type === 'LOG'
+                        ? 'Table Studio'
+                        : 'Edit & [[Link]]'}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
 
               {/* Hashtags Row */}
@@ -483,6 +525,17 @@ export const NodeQuickPreviewModal: React.FC = () => {
         node={editingDataLogNode}
         onClose={() => setEditingDataLogNode(null)}
         onSwitchToNode={handleSwitchWorkspaceNode}
+      />
+
+      {/* Phase 4 CamScanner-Grade Document Scanner & PDF Studio Modal */}
+      <ScannerAndPdfStudioModal
+        visible={Boolean(editingScannerNode)}
+        existingScanNode={editingScannerNode}
+        onClose={() => setEditingScannerNode(null)}
+        onScanSaved={(savedNode) => {
+          setEditingScannerNode(null);
+          setInspectingNode(savedNode);
+        }}
       />
     </>
   );
