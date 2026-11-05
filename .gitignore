@@ -4,3 +4,13 @@ dist/
 web-build/
 *.log
 .DS_Store
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+play-store/*.aab
+play-store/*.apk
+play-store/*.keystore
+play-store/KEYSTORE_CREDENTIALS.txt
+play-store/google-play-service-account.json
+android/app/*.keystore
